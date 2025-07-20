@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image"; // Add this import
 
 export default function Home() {
   return (
@@ -17,29 +18,30 @@ export default function Home() {
         </p>
 
         <div className="flex justify-center gap-6 flex-wrap">
-  <Link href="/dashboard">
-    <button className="px-4 py-2 rounded-xl text-lg font-semibold border border-purple-500 text-purple-300 bg-black hover:bg-gradient-to-r hover:from-purple-600 hover:via-pink-500 hover:to-purple-600 hover:text-white transition-all duration-300 shadow-[0_0_10px_rgba(192,132,252,0.3)] hover:shadow-[0_0_25px_rgba(192,132,252,0.7)] hover:animate-bounce">
-      Get Started
-    </button>
-  </Link>
-  <Link href="/event">
-    <button className="px-4 py-2 rounded-xl text-lg font-semibold border border-purple-500 text-purple-300 bg-black hover:bg-gradient-to-r hover:from-purple-600 hover:via-pink-500 hover:to-purple-600 hover:text-white transition-all duration-300 shadow-[0_0_10px_rgba(192,132,252,0.3)] hover:shadow-[0_0_25px_rgba(192,132,252,0.7)] hover:animate-bounce">
-      Create Schedule
-    </button>
-  </Link>
-</div>
-
+          <Link href="/dashboard">
+            <button className="px-4 py-2 rounded-xl text-lg font-semibold border border-purple-500 text-purple-300 bg-black hover:bg-gradient-to-r hover:from-purple-600 hover:via-pink-500 hover:to-purple-600 hover:text-white transition-all duration-300 shadow-[0_0_10px_rgba(192,132,252,0.3)] hover:shadow-[0_0_25px_rgba(192,132,252,0.7)] hover:animate-bounce">
+              Get Started
+            </button>
+          </Link>
+          <Link href="/event">
+            <button className="px-4 py-2 rounded-xl text-lg font-semibold border border-purple-500 text-purple-300 bg-black hover:bg-gradient-to-r hover:from-purple-600 hover:via-pink-500 hover:to-purple-600 hover:text-white transition-all duration-300 shadow-[0_0_10px_rgba(192,132,252,0.3)] hover:shadow-[0_0_25px_rgba(192,132,252,0.7)] hover:animate-bounce">
+              Create Schedule
+            </button>
+          </Link>
+        </div>
       </div>
 
       {/* Hero Image */}
       <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 z-10">
-        <img
+        <Image
           src="/images/Home.png"
           alt="Hero"
+          width={1100}
+          height={600} // Adjust to actual image height if known
           className="w-[1100px] max-w-none object-contain pointer-events-none select-none"
+          priority
         />
       </div>
     </div>
   );
 }
-

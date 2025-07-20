@@ -260,7 +260,7 @@ export default function DashboardPage() {
         <div className="bg-black/60 rounded-xl p-5 shadow backdrop-blur-2xl border border-pink-900/30 w-full flex flex-col gap-2">
           <h3 className="text-lg font-semibold mb-1">📝 To-do</h3>
           <ul className="list-disc ml-5 text-white/90">
-            <li>Attend today's events</li>
+            <li>{"Attend today's events"}</li>
             <li>Check new notices</li>
             <li>Sync your calendar</li>
           </ul>

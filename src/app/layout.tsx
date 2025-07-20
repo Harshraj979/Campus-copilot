@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import Image from "next/image"; // Add this import
 
 // Fonts
 const geistSans = Geist({
@@ -29,15 +30,19 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
           <Navbar />
           <main className="relative min-h-screen flex items-center justify-center bg-black">
             <div className="fixed inset-0 -z-10 pointer-events-none">
-              <img
+              <Image
                 src="/images/image1.png"
                 alt="Background"
-                className="w-full h-full object-cover"
+                fill
+                className="object-cover w-full h-full"
                 draggable={false}
+                priority
               />
             </div>
             {children}

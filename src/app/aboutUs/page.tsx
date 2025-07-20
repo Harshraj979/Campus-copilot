@@ -199,7 +199,7 @@ export default function AboutPage() {
 
           {submitted && (
             <div className="mt-2 text-purple-300 text-center">
-              Thank you! We'll be in touch soon.
+              { "Thank you! We'll be in touch soon."}
             </div>
           )}
         </div>
