@@ -11,6 +11,7 @@ import {
 import { useEffect, useState } from "react";
 import { db } from "@/lib/firebase";
 import Link from "next/link";
+import Image from "next/image"; // <-- Add this!
 
 interface Event {
   id: string;
@@ -145,10 +146,13 @@ export default function DashboardPage() {
       {/* GLOWING BACKGROUND */}
       <div className="fixed bottom-[-200px] left-1/2 transform -translate-x-1/2 w-[1000px] h-[600px] bg-purple-600 opacity-30 blur-[200px] rounded-full z-0" />
       <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 z-0">
-        <img
+        <Image
           src="/images/image1.png"
           alt="Background Hero"
+          width={1540}
+          height={700}
           className="w-[1540px] max-w-none object-contain pointer-events-none select-none"
+          priority
         />
       </div>
       {/* GREETING HEADER */}

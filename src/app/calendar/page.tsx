@@ -1,4 +1,3 @@
-// src/app/calendar/page.tsx
 "use client";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
@@ -11,10 +10,8 @@ import {
   query,
   orderBy,
   limit,
-  DocumentData,
-  QueryDocumentSnapshot,
 } from "firebase/firestore";
-import { text } from "node:stream/consumers";
+import Image from "next/image"; // Correct import
 
 // Calendar Setup
 const localizer = momentLocalizer(moment);
@@ -69,10 +66,13 @@ export default function CalendarPage() {
       {/* Background glow & image */}
       <div className="fixed bottom-[-200px] left-1/2 transform -translate-x-1/2 w-[1000px] h-[600px] bg-purple-600 opacity-30 blur-[200px] rounded-full z-0" />
       <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 z-0">
-        <img
+        <Image
           src="/images/image1.png"
           alt="Background Hero"
+          width={1550}
+          height={800}
           className="w-[1550px] max-w-none object-contain pointer-events-none select-none"
+          priority
         />
       </div>
       <div className="z-10 w-full max-w-6xl px-5 md:px-8">
@@ -86,28 +86,26 @@ export default function CalendarPage() {
               events={events}
               startAccessor="start"
               endAccessor="end"
-              style={{ height: 400,
+              style={{
+                height: 400,
                 fontFamily: "Inter, sans-serif",
                 fontSize: "0.9rem",
                 fontWeight: "500",
-                }}
+              }}
               className="text-blue-400 custom-calendar-theme"
               eventPropGetter={() => ({
-    style: {
-      backgroundColor: 'rgba(168,139,250,0.7)', // Purple glassy
-      color: 'black', // White text
-      borderRadius: '20px',
-      border: 'none',
-      boxShadow: '0 1px 7px 0 rgba(168,139,250,0.9)',
-      textAlign: 'center',
-      fontSize: '0.9rem',
-      fontWeight: '500',
-      fontStyle: 'oblique'
-
-      // any other inline CSS styles you want to apply
-    },
-  })}
- 
+                style: {
+                  backgroundColor: "rgba(168,139,250,0.7)",
+                  color: "black",
+                  borderRadius: "20px",
+                  border: "none",
+                  boxShadow: "0 1px 7px 0 rgba(168,139,250,0.9)",
+                  textAlign: "center",
+                  fontSize: "0.9rem",
+                  fontWeight: "500",
+                  fontStyle: "oblique",
+                },
+              })}
             />
             {loading && (
               <div className="absolute inset-0 flex items-center justify-center bg-black/20 z-20 rounded-xl">

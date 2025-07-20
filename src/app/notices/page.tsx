@@ -10,13 +10,14 @@ import {
   limit
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import Image from "next/image"; // <-- Add this
 
 interface Event {
   id: string;
   title: string;
   time: string;
   date: string;
-  startdate?: any; // optional, for calendar logic
+  startdate?: any;
   enddate?: any;
 }
 
@@ -68,9 +69,14 @@ export default function CalendarPage() {
       {/* BG Glow */}
       <div className="absolute bottom-[-200px] left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-purple-600 opacity-30 blur-[200px] rounded-full z-0"/>
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 z-10 pointer-events-none select-none">
-        <img src="/images/image1.png"
-             alt="Hero"
-             className="w-[1550px] max-w-none object-contain"/>
+        <Image
+          src="/images/image1.png"
+          alt="Hero"
+          width={1550}
+          height={800}
+          className="w-[1550px] max-w-none object-contain"
+          priority
+        />
       </div>
 
       <div className="relative z-20 w-full max-w-3xl mx-auto">

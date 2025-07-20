@@ -1,7 +1,8 @@
 "use client";
 
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
+import Image from "next/image"; // Correct import (capital I)
 
 const SOCIAL_LINKS = [
   {
@@ -30,13 +31,13 @@ export default function AboutPage() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  
   useEffect(() => {
-     if (submitted) {
+    if (submitted) {
       const timer = setTimeout(() => setSubmitted(false), 5000);
       return () => clearTimeout(timer);
-   }
+    }
   }, [submitted]);
-
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -49,9 +50,9 @@ export default function AboutPage() {
     emailjs
       .send(
         "service_vq43ovi",     
-        "template_ixyd1ak",     
+        "template_ixyd1ak",    
         form,
-        "i3iuOFxfRpH-z6eoG"      
+        "i3iuOFxfRpH-z6eoG"     
       )
       .then(
         () => {
@@ -66,17 +67,19 @@ export default function AboutPage() {
         }
       );
   };
-  
 
   return (
     <main className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden p-6">
       {/* Background Glow */}
       <div className="fixed bottom-[-200px] left-1/2 transform -translate-x-1/2 w-[1000px] h-[600px] bg-purple-600 opacity-30 blur-[200px] rounded-full z-0" />
       <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 z-10 pointer-events-none select-none">
-        <img
+        <Image
           src="/images/image1.png"
           alt="About Page Decoration"
+          width={1550}
+          height={800}
           className="w-[1550px] max-w-none object-contain"
+          priority
         />
       </div>
 
@@ -103,11 +106,13 @@ export default function AboutPage() {
                 aria-label={link.label}
               >
                 <div className="flex items-center justify-center rounded-full bg-white/10 backdrop-blur w-14 h-14 mb-1 shadow">
-                  <img
+                  <Image
                     src={link.iconPath}
                     alt={`${link.label} Icon`}
-                    className="w-8 h-8 object-contain"
+                    width={32}
+                    height={32}
                     draggable={false}
+                    className="w-8 h-8 object-contain"
                   />
                 </div>
                 <span className="mt-1 text-sm text-white">{link.label}</span>
@@ -196,7 +201,6 @@ export default function AboutPage() {
             <div className="mt-2 text-purple-300 text-center">
               Thank you! We'll be in touch soon.
             </div>
-            
           )}
         </div>
       </div>

@@ -4,6 +4,7 @@ import { useUser } from "@clerk/nextjs";
 import { db } from "@/lib/firebase";
 import { collection, addDoc, serverTimestamp, Timestamp } from "firebase/firestore";
 import { useRouter } from "next/navigation";
+import Image from "next/image"; // <-- Add this!
 
 export default function CreateEventPage() {
   const { user } = useUser();
@@ -18,7 +19,6 @@ export default function CreateEventPage() {
     if (!user) return;
     setLoading(true);
     try {
-
       const startISO = `${date}T${time}:00`;
       const startDate = new Date(startISO);
 
@@ -50,10 +50,13 @@ export default function CreateEventPage() {
       {/* Glowing background ellipse */}
       <div className="absolute bottom-[-200px] left-1/2 transform -translate-x-1/2 w-[1000px] h-[600px] bg-purple-600 opacity-30 blur-[200px] rounded-full z-0" />
       <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 z-10 pointer-events-none select-none">
-        <img
+        <Image
           src="/images/image1.png"
           alt="Hero"
+          width={1550}
+          height={800}
           className="w-[1550px] max-w-none object-contain"
+          priority
         />
       </div>
       <form
