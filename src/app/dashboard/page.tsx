@@ -229,7 +229,6 @@ export default function DashboardPage() {
             ))
           ) : (
             <li className="flex flex-col col-span-full items-center py-10">
-              <Image src="/svg/empty-state-calendar.svg" width={72} height={72} alt="" className="mb-3 opacity-75"/>
               <p className="text-lg text-pink-300 font-bold mb-2">No events for today.</p>
               <span className="text-sm text-gray-400 mt-2">Stay productive 🎯</span>
             </li>
