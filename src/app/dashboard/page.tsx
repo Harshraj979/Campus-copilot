@@ -194,7 +194,7 @@ export default function DashboardPage() {
             <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" className="text-purple-600" />
             <path d="M16 12A4 4 0 1 1 8 12a4 4 0 0 1 8 0z" fill="currentColor" />
           </svg>
-          Today's Events
+          Today&apos;s Events
         </h2>
         <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {loadingEvents ? (

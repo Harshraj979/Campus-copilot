@@ -17,6 +17,6 @@ const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app); 
 
-enableIndexedDbPersistence(db).catch((_err) => {});
+enableIndexedDbPersistence(db).catch(() => {});
 
 export { db, auth };
