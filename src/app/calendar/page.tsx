@@ -87,7 +87,7 @@ export default function CalendarPage() {
 
         const filteredEvents = filterUpcomingEvents(eventList);
         setEvents(filteredEvents);
-      } catch (e) {
+      } catch {
         setEvents([]);
       } finally {
         setLoading(false);

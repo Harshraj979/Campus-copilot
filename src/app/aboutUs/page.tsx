@@ -1,9 +1,9 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import Image from "next/image";
 
-// Loading skeleton for images
+// Social Icon with skeleton loader
 function SocialImage({ src, alt }: { src: string; alt: string }) {
   const [loaded, setLoaded] = useState(false);
   return (
@@ -61,7 +61,7 @@ function validateForm(form: { name: string; email: string; message: string }) {
   );
 }
 
-// ------ Toast component ------
+// Toast notification
 function Toast({
   message,
   type,
@@ -96,7 +96,7 @@ export default function AboutPage() {
   const [submitting, setSubmitting] = useState(false);
   const [toast, setToast] = useState<null | { msg: string; type: "success" | "error" }>(null);
 
-  // Reset toast as soon as user types again (success or error)
+  // Clear toast on user typing
   useEffect(() => {
     setToast(null);
   }, [form]);
@@ -226,7 +226,7 @@ export default function AboutPage() {
             <div className="flex justify-center">
               <button
                 type="submit"
-                disabled={submitting || !validateForm(form)}
+                disabled={submitting || !isValid}
                 className="bg-black border-2 border-purple-500 rounded-xl px-8 py-2 text-lg font-bold text-purple-500 shadow transition disabled:opacity-50 flex items-center gap-2"
               >
                 {submitting ? (

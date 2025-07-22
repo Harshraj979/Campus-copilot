@@ -123,7 +123,7 @@ export default function NoticesPage() {
         setNotices(freshNotices);
         setNoticesLoading(false);
       },
-      (err) => {
+      () => {
         setNoticesLoading(false);
         showToast("Could not load notices.", "error");
       }
@@ -174,10 +174,8 @@ export default function NoticesPage() {
           <form
             onSubmit={handleSubmit}
             className="space-y-4 bg-black/30 border border-white/10 rounded-xl p-5 shadow"
-            aria-labelledby="post-notice-heading"
           >
             <input
-              aria-label="Title"
               type="text"
               value={title}
               placeholder="Notice Title"
@@ -187,7 +185,6 @@ export default function NoticesPage() {
               maxLength={120}
             />
             <textarea
-              aria-label="Notice Content"
               value={content}
               placeholder="What's the notice about?"
               onChange={(e) => setContent(e.target.value)}
@@ -200,7 +197,6 @@ export default function NoticesPage() {
                 type="submit"
                 disabled={loading || !title.trim() || !content.trim()}
                 className="px-5 py-2 rounded-xl text-lg font-semibold bg-gradient-to-r from-purple-600 via-sky-400 to-cyan-400 text-white hover:brightness-110 hover:scale-105 transition-all duration-200 shadow-md focus:outline-none focus:ring-2 focus:ring-slate-400 disabled:opacity-60"
-                aria-label="Post Notice"
               >
                 {loading ? (
                   <span className="flex items-center">
@@ -233,7 +229,7 @@ export default function NoticesPage() {
         <section className="space-y-4">
           {noticesLoading ? (
             // Skeleton Placeholder
-            <div className="space-y-6 animate-pulse" aria-label="Loading notices">
+            <div className="space-y-6 animate-pulse">
               {[...Array(3)].map((_, idx) => (
                 <div
                   key={idx}

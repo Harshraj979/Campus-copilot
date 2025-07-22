@@ -43,7 +43,6 @@ const EVENTS_PAGE_SIZE = 30;
 // Helper for status badge: basic time check
 function getEventStatus(event: Event): "upcoming" | "ongoing" | "done" {
   const now = new Date();
-  const [startH, startM] = event.time?.split(":").map(Number) || [];
   const eventStart = new Date(event.date + "T" + event.time);
   if (now < eventStart) return "upcoming";
   const eventEnd = new Date(eventStart.getTime() + 60 * 60 * 1000);
@@ -161,7 +160,6 @@ export default function DashboardPage() {
 
   return (
     <main className="relative min-h-screen pt-[100px] pb-24 px-4 sm:px-6 md:px-10 bg-black text-white overflow-x-hidden">
-
       {/* BACKGROUND */}
       <div className="fixed bottom-[-200px] left-1/2 transform -translate-x-1/2 w-[1000px] h-[600px] bg-purple-600 opacity-30 blur-[200px] rounded-full z-0" />
       <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 z-0">
@@ -212,7 +210,6 @@ export default function DashboardPage() {
               <li
                 key={event.id}
                 tabIndex={0}
-                aria-label={`Event: ${event.title}, ${event.time}`}
                 className="flex flex-col justify-between rounded-xl p-6 bg-gradient-to-br from-black/80 via-purple-950/70 to-black/80 shadow-2xl border border-purple-700/30
                   hover:scale-[1.03] hover:ring-2 hover:ring-cyan-400 focus:scale-[1.03] transition cursor-pointer group"
               >
@@ -258,7 +255,6 @@ export default function DashboardPage() {
               <Link
                 href={action.href}
                 className="block px-6 py-3 rounded-lg text-lg font-semibold bg-black text-white border-none focus:outline-none focus:ring-2 focus:ring-sky-400 shadow transition-all"
-                aria-label={action.label}
               >
                 {action.label}
               </Link>
@@ -280,7 +276,7 @@ export default function DashboardPage() {
         <div className="bg-black/60 rounded-xl p-5 shadow backdrop-blur-2xl border border-pink-900/30 w-full flex flex-col gap-2">
           <h3 className="text-lg font-semibold mb-1 flex items-center gap-2">📝 To-do</h3>
           <ul className="list-disc ml-5 text-white/90">
-            <li>{"Attend today's events"}</li>
+            <li>{"Attend today&apos;s events"}</li>
             <li>Check new notices</li>
             <li>Sync your calendar</li>
           </ul>
