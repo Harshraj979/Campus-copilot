@@ -1,4 +1,5 @@
 "use client";
+
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
@@ -10,8 +11,10 @@ import {
   query,
   orderBy,
   limit,
+  where,            // import where for query filter
 } from "firebase/firestore";
 import Image from "next/image";
+import { useUser } from "@clerk/nextjs";  // import Clerk user hook
 
 // Calendar Setup
 const localizer = momentLocalizer(moment);
@@ -26,6 +29,8 @@ type CalendarEvent = {
 const EVENTS_PAGE_SIZE = 100;
 
 export default function CalendarPage() {
+  const { user, isLoaded } = useUser();        // get current user from Clerk
+
   const [events, setEvents] = useState<CalendarEvent[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -41,19 +46,22 @@ export default function CalendarPage() {
     return eventList.filter(ev => ev.start >= today);
   }
 
-  // Fetch events from Firestore
+  // Fetch events created by current user only
   useEffect(() => {
     const fetchEvents = async () => {
+      if (!isLoaded || !user) return;  // Wait for user to load
+
       setLoading(true);
       const eventList: CalendarEvent[] = [];
       try {
         const q = query(
           collection(db, "events"),
+          where("userId", "==", user.id),     // Filter: only events created by me
           orderBy("createdAt", "desc"),
           limit(EVENTS_PAGE_SIZE)
         );
         const snapshot = await getDocs(q);
-        snapshot.forEach((doc) => {
+        snapshot.forEach(doc => {
           const data = doc.data();
           let start: Date, end: Date;
 
@@ -94,14 +102,15 @@ export default function CalendarPage() {
       }
     };
     fetchEvents();
-  }, []);
+  }, [isLoaded, user]);
 
   // Get events for a single calendar day (ignoring time)
   function getEventsForDay(date: Date) {
-    return events.filter(ev =>
-      ev.start.getFullYear() === date.getFullYear() &&
-      ev.start.getMonth() === date.getMonth() &&
-      ev.start.getDate() === date.getDate()
+    return events.filter(
+      ev =>
+        ev.start.getFullYear() === date.getFullYear() &&
+        ev.start.getMonth() === date.getMonth() &&
+        ev.start.getDate() === date.getDate()
     );
   }
 
@@ -144,7 +153,7 @@ export default function CalendarPage() {
                 height: 400,
                 fontFamily: "Inter, sans-serif",
                 fontSize: "0.9rem",
-                fontWeight: "500"
+                fontWeight: "500",
               }}
               className="text-blue-400 custom-calendar-theme"
               eventPropGetter={() => ({
@@ -190,9 +199,9 @@ export default function CalendarPage() {
                         <li key={ev.id || i} className="mb-2">
                           <div className="font-semibold">{ev.title}</div>
                           <div className="text-sm text-gray-500">
-                            {ev.start.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                            {ev.start.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
                             {ev.end > ev.start && (
-                              <> – {ev.end.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</>
+                              <> – {ev.end.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</>
                             )}
                           </div>
                         </li>
